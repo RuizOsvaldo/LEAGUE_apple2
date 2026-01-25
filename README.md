@@ -1,7 +1,7 @@
 # Apple Collector
 
 ## Introduction @unplugged
-Welcome to Apple Collector! In this game, you'll race against time to collect as many apples as you can before the countdown ends. This tutorial introduces new concepts like scoring, timers, and spawning objects. Let's build it!
+Welcome to The LEAGUE's intermediate Apple Collector game! In this game, you'll race against time to collect as many apples as you can before the countdown ends. This tutorial introduces new concepts like scoring, timers, and spawning objects. Let's build it!
 
 ## Step 1
 
