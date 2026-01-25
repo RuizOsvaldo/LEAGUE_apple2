@@ -1,13 +1,14 @@
-# Apple Collector
+# Apple Collector (Intermediate)
 
 ## Introduction @unplugged
-Welcome to The LEAGUE's intermediate Apple Collector game! In this game, you'll race against time to collect as many apples as you can before the countdown ends. This tutorial introduces new concepts like scoring, timers, and spawning objects. Let's build it!
+Welcome to The LEAGUE's **intermediate Apple Collector** game!  
+In this version, you'll build on the beginner game by adding a **countdown timer**, **automatic apple spawning**, and a **game ending condition**. Your goal is to collect as many apples as possible before time runs out. Let's level up!
 
 ## Step 1
 
-Let's set up the game environment by choosing a background color.
+Start by setting the background color for your game.
 
-From the ``||scene:Scene||`` category, use ``||scene:set background color||`` and pick your favorite color.
+From the ``||scene:Scene||`` category, use ``||scene:set background color||`` and choose a color you like.
 
 ```blocks
 scene.setBackgroundColor(7)
@@ -15,9 +16,10 @@ scene.setBackgroundColor(7)
 
 ## Step 2
 
-Create the player character who will collect the apples.
+Create your player sprite.
 
-From ``||sprites:Sprites||``, ``||sprites:create a sprite||`` and name it **player**. Set the kind to **Player** and choose the `Collector` image from your assets.
+From ``||sprites:Sprites||``, use ``||sprites:create a sprite||`` and name it **player**.  
+Set the kind to **Player** and choose the `Collector` image from your assets.
 
 ```blocks
 scene.setBackgroundColor(7)
@@ -26,9 +28,10 @@ let player = sprites.create(assets.image`Collector`, SpriteKind.Player)
 
 ## Step 3
 
-Make the player controllable with the buttons.
+Make the player move using the controller buttons.
 
-From ``||controller:Controller||``, use ``||controller:move sprite with buttons||`` and set the speed to **100** for both vx and vy.
+From ``||controller:Controller||``, use ``||controller:move sprite with buttons||``.  
+Set both **VX** and **VY** to **100**.
 
 ```blocks
 scene.setBackgroundColor(7)
@@ -40,7 +43,7 @@ controller.moveSprite(player, 100, 100)
 
 Keep the player inside the screen so they can't run off the edges.
 
-From ``||sprites:Sprites||``, use ``||sprites:set stay in screen||`` to **ON** for your player sprite.
+From ``||sprites:Sprites||``, use ``||sprites:set stay in screen||`` and turn it **ON**.
 
 ```blocks
 scene.setBackgroundColor(7)
@@ -51,9 +54,9 @@ player.setStayInScreen(true)
 
 ## Step 5
 
-Set up the score counter to track collected apples.
+Initialize the score.
 
-From ``||info:Info||``, use ``||info:set score to 0||`` to start the game with zero points.
+From ``||info:Info||``, use ``||info:set score to 0||`` so the game starts with zero points.
 
 ```blocks
 scene.setBackgroundColor(7)
@@ -65,9 +68,9 @@ info.setScore(0)
 
 ## Step 6
 
-Add a countdown timer to make the game challenging!
+Add a countdown timer to create urgency.
 
-From ``||info:Info||``, use ``||info:start countdown||`` and set it to **30** seconds. The timer will appear at the top of the screen.
+From ``||info:Info||``, use ``||info:start countdown||`` and set it to **30** seconds.
 
 ```blocks
 scene.setBackgroundColor(7)
@@ -80,22 +83,22 @@ info.startCountdown(30)
 
 ## Step 7
 
-Now let's make apples appear automatically throughout the game.
+Make apples spawn automatically during the game.
 
-From ``||game:Game||``, use ``||game:on game update every||`` and set it to **1500** ms (1.5 seconds). This will run code repeatedly during the game.
+From ``||game:Game||``, use ``||game:on game update every||`` and set it to **1500 ms**.
 
 ```blocks
 let apple: Sprite = null
 game.onUpdateInterval(1500, function () {
-	
+
 })
 ```
 
 ## Step 8
 
-Inside the game update interval, create an apple sprite.
+Create an apple sprite inside the update block.
 
-``||sprites:Create a sprite||`` called **apple** with kind **Food** and use the `Apple` image from your assets.
+From ``||sprites:Sprites||``, create a sprite named **apple**, set its kind to **Food**, and use the `Apple` image from your assets.
 
 ```blocks
 let apple: Sprite = null
@@ -106,11 +109,11 @@ game.onUpdateInterval(1500, function () {
 
 ## Step 9
 
-Make each apple appear at a random position on the screen.
+Make each apple appear at a random position.
 
-From ``||sprites:Sprites||``, use ``||sprites:set position||`` for the apple. For the x and y coordinates, use ``||math:pick random||`` from the ``||math:Math||`` category:
-- x: random from **10** to **150**
-- y: random from **10** to **110**
+Use ``||sprites:set position||`` with ``||math:pick random||``:
+- **x** from 10 to 150  
+- **y** from 10 to 110  
 
 ```blocks
 let apple: Sprite = null
@@ -122,11 +125,11 @@ game.onUpdateInterval(1500, function () {
 
 ## Step 10
 
-Detect when the player collects an apple and add to the score.
+Increase the score when the player collects an apple.
 
-From ``||sprites:Sprites||``, use ``||sprites:on sprite overlaps||`` with **Player** and **Food**. When they overlap:
-- ``||info:change score by 1||``
-- ``||sprites:destroy||`` the food sprite
+From ``||sprites:on sprite overlaps||`` with **Player** and **Food**:
+- Increase the score by 1
+- Destroy the apple sprite
 
 ```blocks
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
@@ -137,12 +140,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 
 ## Step 11
 
-Finally, let's end the game when time runs out!
+End the game when the countdown reaches zero.
 
-From ``||info:Info||``, use ``||info:on countdown end||``. Inside this event:
-- Use ``||game:splash||`` to show the message "Time's up!" 
-- On the second line, use ``||text:join||`` from ``||text:Text||`` to combine "You collected ", ``||info:score||``, and " apples!"
-- End with ``||game:game over||`` set to **WIN** with the **confetti** effect
+From ``||info:on countdown end||``:
+- Show a splash message
+- Display the final score
+- End the game with a **WIN** and **confetti** effect
 
 ```blocks
 info.onCountdownEnd(function () {
@@ -153,38 +156,11 @@ info.onCountdownEnd(function () {
 
 ## Conclusion @unplugged
 
-Awesome work! You've created a timed collection game with spawning objects and scoring! 
+Great job! You built a timed collection game with automatic spawning and a clear win condition.
 
 **Try these challenges:**
-- Change the countdown time to make it easier or harder
-- Adjust how often apples spawn (the 1500 ms interval)
-- Add different types of food worth different points
-- Create obstacles to avoid
+- Change the countdown length
+- Adjust the apple spawn speed
+- Add apples worth different points
+- Add obstacles to avoid
 - Add sound effects when collecting apples
-
-Have fun customizing your game!
-
-
-> Open this page at [https://ruizosvaldo.github.io/league_apple2/](https://ruizosvaldo.github.io/league_apple2/)
-
-## Use as Extension
-
-This repository can be added as an **extension** in MakeCode.
-
-* open [https://arcade.makecode.com/](https://arcade.makecode.com/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/ruizosvaldo/league_apple2** and import
-
-## Edit this project
-
-To edit this repository in MakeCode.
-
-* open [https://arcade.makecode.com/](https://arcade.makecode.com/)
-* click on **Import** then click on **Import URL**
-* paste **https://github.com/ruizosvaldo/league_apple2** and click import
-
-#### Metadata (used for search, rendering)
-
-* for PXT/arcade
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
